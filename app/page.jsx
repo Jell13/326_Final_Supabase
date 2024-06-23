@@ -13,8 +13,9 @@ export default function Home() {
   },[])
 
   const getTodo = async () => {
-    const{data,error} = await supabase.from("notes").select()
-    console.log(JSON.stringify(data, null, 2))
+    const{data,error} = await supabase.from("notes").select("*")
+    // console.log(data)
+    setTodos(data)
   }
   const handleSubmit = () => {
 
@@ -30,7 +31,7 @@ export default function Home() {
           </div>
           <div className="overflow-y-scroll max-h-24 w-full">
             {todos.map(todo => (
-              <li>{}</li>
+              <li key={todo.id}>{todo.title}</li>
             ))}
           </div>
         </div>
